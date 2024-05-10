@@ -1,0 +1,643 @@
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2024 by anonymous (http://jsbin.com/kagemaruci/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2024 by anonymous (http://jsbin.com/yifeyurena/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+    <title>Form Peak - Lead Capture Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.8/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.2/alpine.min.js"></script>
+    <style>
+        /* Navigation */
+        .nav {
+            background-color: #000;
+        }
+
+        .nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .nav li {
+            float: left;
+        }
+
+        .nav li a {
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .nav .menu-icon {
+            display: none;
+        }
+
+        @media screen and (max-width: 600px) {
+            .nav li:not(:first-child) {
+                display: none;
+            }
+
+            .nav .menu-icon {
+                display: block;
+                float: right;
+                cursor: pointer;
+                color: #fff;
+                padding: 15px 14px;
+            }
+
+            .nav .menu-icon:hover {
+                background-color: #111;
+            }
+
+            .nav .menu-icon i {
+                font-size: 18px;
+            }
+
+            .nav .menu-items {
+                position: fixed;
+                width: 100%;
+                height: 100vh;
+                background-color: #111;
+                top: 60px;
+                left: 0;
+                transform: translateX(-100%);
+                transition: transform 0.4s ease-in-out;
+            }
+
+            .nav .menu-items.show {
+                transform: translateX(0%);
+            }
+
+            .nav .menu-items ul {
+                padding: 20px;
+            }
+
+            .nav .menu-items li {
+                display: block;
+                margin-bottom: 15px;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            width: 100%;
+            height: 100vh;
+            background: url(https://source.unsplash.com/1600x900/?fitness) center center no-repeat;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero .cta {
+            text-align: center;
+        }
+
+        .hero .cta a {
+            padding: 12px 24px;
+            background-color: #000;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background-color 0.4s ease-in-out;
+        }
+
+        .hero .cta a:hover {
+            background-color: #444;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background-color: #000;
+            color: #fff;
+        }
+
+        .about h2 {
+            font-size: 36px;
+            text-align: center;
+        }
+
+        .about p {
+            font-size: 18px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            color: #000;
+        }
+
+        .features h2 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .features ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .features li {
+            text-align: center;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+            background-color: #000;
+            color: #fff;
+        }
+
+        .pricing h2 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .pricing ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .pricing li {
+            text-align: center;
+        }
+
+        /* Problem Section */
+        .problem {
+            padding: 80px 0;
+            color: #000;
+        }
+
+        .problem h2 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Solution Section */
+        .solution {
+            padding: 80px 0;
+            background-color: #000;
+            color: #fff;
+        }
+
+        .solution h2 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Social Proof Section */
+        .social-proof {
+            padding: 80px 0;
+            color: #000;
+        }
+
+        .social-proof h2 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Team Section */
+        .team {
+            padding: 80px 0;
+            background-color: #000;
+            color: #fff;
+        }
+
+        .team h2 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .team ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .team li {
+            text-align: center;
+        }
+
+        /* Contact Us Section */
+        .contact-us {
+            padding: 80px 0;
+            color: #000;
+        }
+
+        .contact-us h2 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .contact-us form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .contact-us form input,
+        .contact-us form textarea {
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .contact-us form textarea {
+            height: 120px;
+        }
+
+        .contact-us form button {
+            padding: 12px 24px;
+            background-color: #000;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background-color 0.4s ease-in-out;
+            cursor: pointer;
+            border: none;
+            outline: none;
+        }
+
+        .contact-us form button:hover {
+            background-color: #444;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+            background-color: #000;
+            color: #fff;
+        }
+
+        .faq h2 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .faq .question {
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .faq .answer {
+            display: none;
+            margin-bottom: 20px;
+        }
+
+        /* Footer Section */
+        .footer {
+            padding: 40px 0;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+        }
+
+        .footer ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .footer li {
+            display: inline;
+        }
+    </style>
+</head>
+<body x-data="{ open: false }">
+    <header class="nav">
+        <nav class="container mx-auto flex items-center justify-between py-4">
+            <a href="#" class="text-white text-lg"><b><u>From Peak</u></b></a>
+            <ul class="hidden md:flex items-center">
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#problem">Problem</a></li>
+                <li><a href="#solution">Solution</a></li>
+                <li><a href="#social-proof">Social Proof</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#contact-us">Contact Us</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+            <div class="menu-icon md:hidden" @click="open = !open">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div                class="menu-items"                :class="{'show': open}"
+                @click.away="open = false"
+            >
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#problem">Problem</a></li>
+                    <li><a href="#solution">Solution</a></li>
+                    <li><a href="#social-proof">Social Proof</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#contact-us">Contact Us</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <section class="hero">
+        <div class="container mx-auto">
+            <h1 class="text-4xl mb-4"><b>Move Harder and Thrive</b></h1>
+            <p class="text-lg"><b>Designed by physiotherapists and personal trainers who are passionate about helping you reach your fitness goals. With personalized plans, constant support, and a friendly community, you'll gain strength, build muscle, and transform your body. We're Here to Ensure you get the guidance you need, whenever you need it. Get ready to move harder, push further, and achieve more gain with Form Peak.</p>
+            <div class="cta mt-8">
+                <a href="#" class="hover:bg-gray-800 bg-black text-white py-3 px-6 rounded-lg">Let's Move</a>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="about">
+        <div class="container mx-auto">
+            <h2 class="text-4xl mb-8"><b>About Us</h2>
+            <p class="text-lg">Welcome to Form Peak, where fitness meets expertise. Our team of physiotherapists and personal trainers is dedicated to helping you reach your fitness goals. Whether you're aiming for muscle gain, strength, or weight loss, we provide personalized plans and 24/7 support. Join our friendly community and discover a new way to move harder, push further, and achieve more. Get ready to transform your body with Form Peak.</p>
+        </div>
+    </section>
+    <section id="features" class="features">
+        <div class="container mx-auto">
+            <h2 class="text-4xl mb-8">Features</h2>
+            <ul>
+                <li>
+                    <i class="far fa-clock fa-5x"></i>
+                    <p>Discipline</p>
+                </li>
+                <li><b>
+                    <i class="far fa-bell fa-5x"></i>
+                    <p>News</p>
+                  </b></li>
+                <li>
+                    <i class="far fa-chart-bar fa-5x"></i>
+                    <p>List</p>
+                </li>
+            </ul>
+        </div>
+      </section>
+     <section id="faq" class="faq py-8">
+    <div class="container mx-auto">
+        <h2 class="text-4xl mb-8">FAQ</h2>
+        
+        <!-- Question 1 -->
+        <div class="question" onclick="toggleAnswer(this)">
+            <p class="flex justify-between items-center cursor-pointer">
+                Which plan is best for me if I'm an advanced athlete looking to maximize muscle growth?
+                <span class="plus-sign">+</span>
+            </p>
+            <div class="answer hidden p-4 bg-gray-100 rounded-lg">
+                For those seeking maximum muscle growth and strength, the Elite Plan is the perfect choice. It includes intense workouts designed for peak performance, with exclusive exercises to challenge you. Plus, you'll get weekly virtual check-ins with a personal trainer to keep you on track. We're here to help you push harder and achieve more.
+            </div>
+        </div>
+        
+        <!-- Question 2 -->
+        <div class="question mt-4" onclick="toggleAnswer(this)">
+            <p class="flex justify-between items-center cursor-pointer">
+                How often do you post fitness news and updates?
+                <span class="plus-sign">+</span>
+            </p>
+            <div class="answer hidden p-4 bg-white-100 rounded-lg">
+                We post fitness news and updates at least three times a week, keeping you informed and motivated. Our content covers the latest workout trends, nutrition tips, and expert advice to inspire your fitness journey.
+            </div>
+        </div>
+        
+        <!-- Question 3 -->
+        <div class="question mt-4" onclick="toggleAnswer(this)">
+            <p class="flex justify-between items-center cursor-pointer">
+                Do you provide warm-up routines?
+                <span class="plus-sign">+</span>
+            </p>
+            <div class="answer hidden p-4 bg-white-100 rounded-lg">
+                Absolutely. Each plan includes warm-up routines to prepare your body for intense workouts. These routines help you avoid injury and ensure you get the most out of every exercise.
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+function toggleAnswer(element) {
+    const answer = element.querySelector('.answer');
+    const plusSign = element.querySelector('.plus-sign');
+
+    if (answer.classList.contains('hidden')) {
+        answer.classList.remove('hidden');
+        plusSign.textContent = '-';
+    } else {
+        answer.classList.add('hidden');
+        plusSign.textContent = '+';
+    }
+}
+</script>
+
+<!-- Social Proof Section -->
+<section id="testimonials" class="py-16">
+  <div class="container mx-auto">
+    <h2 class="text-3xl md:text-4xl text-center font-bold mb-4">Our Team</h2>
+    <div class="flex flex-wrap justify-center">
+      <!-- First Box -->
+      <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
+        <div class="bg-white rounded shadow-lg p-6">
+          <div class="flex mb-4">
+            <div class="mr-4">
+              <img src="https://source.unsplash.com/random/50x50/?person" alt="Testimonial Avatar" class="rounded-full">
+            </div>
+            <div>
+              <h2 class="text-lg font-semibold">Jane Doe</h2>
+              <p class="text-gray-700">Fitness Enthusiast</p>
+            </div>
+          </div>
+          <p class="text-gray-700">This is Jane's testimonial text.</p>
+        </div>
+      </div>
+
+      <!-- Second Box -->
+      <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
+        <div class="bg-white rounded shadow-lg p-6">
+          <div class="flex mb-4">
+            <div class="mr-4">
+              <img src="https://source.unsplash.com/random/50x50/?person" alt="Testimonial Avatar" class="rounded-full">
+            </div>
+            <div>
+              <h2 class="text-lg font-semibold">Dominic</h2>
+              <p class="text-gray-700">Physiotherapist</p>
+            </div>
+          </div>
+          <p class="text-gray-700">
+            I'm a licensed physical therapist with a degree in BSc. Physical Therapy and over two years as a gym athlete. I combine my therapy knowledge and fitness experience to help you reach your fitness goals while staying safe.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- New Paragraph Section FAQ-->
+    <div class="text-center mt-8">
+      <p class="text-gray-700 text-lg">
+        If you have questions about your workout plan or need personalized guidance, We are here to support you. Drop us a message, and let's build your custom fitness plan together. We value your feedback, so don't hesitate to share your thoughts — your input helps us improve and serve you better. Let's get started on your fitness journey!
+      </p>
+    </div>
+  </div>
+</section>
+    <section id="problem" class="problem">
+        <div class="container mx-auto">
+            <h2 class="text-4xl mb-8">Problem</h2>
+            <p class="text-lg">Many fitness enthusiasts struggle with finding accurate and reliable information about workouts and diet plans. They often encounter conflicting advice, unclear instructions, and lack of personalized guidance. As a result, they may feel overwhelmed and unsure about the best way to achieve their fitness goals. Additionally, many people find it challenging to create effective workout plans and diets tailored to their specific needs, leading to slow progress and frustration.</p>
+        </div>
+    </section>
+    <section id="solution" class="solution">
+        <div class="container mx-auto">
+            <h2 class="text-4xl mb-8">Solution</h2>
+            <p class="text-lg">We at Form Peak are here to guide you on your fitness journey. We offer personalized workout and diet plans tailored to your goals, with expert advice through our news articles and journals. Need extra support? Call or video chat with us, and we'll help you design the best plan for your life.
+Ready to transform? We provide the tools and encouragement to help you succeed. Get started with From Peak —we'll be with you every step of the way.
+</p>
+            <div class="cta mt-8">
+                <a href="#" class="hover:bg-gray-800 bg-black text-white py-3 px-6 rounded-lg"><center>Move Up</center></a>
+            </div>
+        </div>
+    </section>
+          <section id="social-proof" class="social-proof">
+  <div class="container mx-auto">
+    <h2 class="text-4xl mb-8">Social Proof</h2>
+    
+    <!-- Description for Social Network Links -->
+    <p class="text-gray-700 mb-4">
+      Follow us on social media! Scroll down to find the social icons below.
+    </p>
+    <p class="text-gray-700 mb-4">
+      Click on any icon to visit our profiles, where you'll find the latest updates, helpful tips, and more.
+    </p>
+    <p class="text-gray-700">
+      We can't wait to connect with you and hear your feedback. Check it out!
+    </p>
+    
+    <!-- (Placeholder for your social media icons) -->
+    <!-- 
+    <div class="flex space-x-4">
+      <a href="your-facebook-link" class="social-icon">FB</a>
+      <a href="your-instagram-link" class="social-icon">IG</a>
+      <a href="your-twitter-link" class="social-icon">TW</a>
+    </div> 
+    -->
+  </div>
+</section>
+
+            <!-- Add testimonials and case studies here-Price -->
+        </div>
+    </section>
+      <section id="pricing" class="py-16">
+    <div class="container mx-auto">
+        <div class="text-center">
+            <h1 class="text-4xl font-bold">Pricing Options</h1>
+            <p class="mt-4">Choose the plan that suits your needs:</p>
+        </div>
+
+        <div class="flex justify-center mt-12">
+            <!-- Basic Plan -->
+            <div class="w-1/3 px-4">
+                <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+                    <h2 class="text-xl font-bold">Basic Plan</h2>
+                    <p class="mt-2">Ideal for beginners or those with simple fitness goals.</p>
+                    <p class="mt-6 text-2xl font-bold">$9.99/month</p>
+                    <a href="/buy/basic" class="mt-6 inline-block px-6 py-3 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600">Buy Now</a>
+                </div>
+            </div>
+
+            <!-- Pro Plan -->
+            <div class="w-1/3 px-4">
+                <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+                    <h2 class="text-xl font-bold">Pro Plan</h2>
+                    <p class="mt-2">For those seeking personalized workout plans.</p>
+                    <p class="mt-6 text-2xl font-bold">$19.99/month</p>
+                    <a href="/buy/pro" class="mt-6 inline-block px-6 py-3 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600">Buy Now</a>
+                </div>
+            </div>
+
+            <!-- Elite Plan -->
+            <div class="w-1/3 px-4">
+                <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+                    <h2 class="text-xl font-bold">Elite Plan</h2>
+                    <p class="mt-2">For serious athletes who want one-on-one guidance.</p>
+                    <p class="mt-6 text-2xl font-bold">$39.99/month</p>
+                    <a href="/buy/elite" class="mt-6 inline-block px-6 py-3 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+      <section id="contact-us" class="contact-us">
+        <div class="container mx-auto">
+            <h2 class="text-4xl mb-8">Contact Us</h2>
+            <form>
+                <input type="text" placeholder="Name" required>
+                <input type="email" placeholder="Email" required>
+                <textarea placeholder="Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container mx-auto">
+           <ul class="flex justify-center gap-6">
+    <li><a href="https://www.facebook.com/YourFacebookPage" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+    <li><a href="https://twitter.com/YourTwitterHandle" target="_blank"><i class="fab fa-twitter"></i></a></li>
+    <li><a href="https://www.instagram.com/forms peak/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+    <li><a href="https://www.linkedin.com/in/YourLinkedInProfile/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+           </ul>
